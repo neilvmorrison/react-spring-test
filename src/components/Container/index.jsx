@@ -1,8 +1,40 @@
-import { animated, useSpring, easings } from "react-spring";
+import { Children, useEffect, useState } from "react";
+import { animated, useSpring, easings, useTrail } from "react-spring";
 import Circle from "../Circle";
 import styles from "./styles.module.css";
 
+const TextTrail = ({ children }) => {
+  const items = Children.toArray(children);
+  const trail = useTrail(items.length, {
+    to: {
+      color: "white",
+      textShadow:
+        "-0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff, 0.5px 0.5px 0 #fff",
+    },
+    from: {
+      color: "black",
+      textShadow:
+        "-0.5px -0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff, 0.5px 0.5px 0 #fff",
+    },
+    config: {
+      duration: 850,
+    },
+  });
+  return (
+    <div>
+      {trail.map(({ ...style }, index) => (
+        <animated.div
+          style={{ fontSize: "2.25rem", display: "block", ...style }}
+        >
+          {items[index]}
+        </animated.div>
+      ))}
+    </div>
+  );
+};
+
 export default function Container() {
+  const [textSlide, setTextSlide] = useState(0);
   const circle1 = useSpring({
     loop: { reverse: true },
     to: {
@@ -139,10 +171,38 @@ export default function Container() {
       easing: easings.easeInOutQuart,
     },
   });
+
+  const textContainer = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    config: {
+      duration: 10000,
+      easing: easings.easeInOutQuart,
+    },
+  });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTextSlide(1);
+    }, 3000);
+  }, []);
+
   return (
     <div className={styles.container}>
       <animated.div className={styles.circlesContainer}>
-        <h1>This is Text</h1>
+        {textSlide === 0 && (
+          <TextTrail>
+            <span>Confidence </span>
+            <span>in </span>
+            <span>your </span>
+            <span>pocket </span>
+          </TextTrail>
+        )}
+        {textSlide === 1 && (
+          <animated.div style={textContainer}>
+            <h1>For those who want access instead of advice</h1>
+          </animated.div>
+        )}
         <Circle style={circle1} />
         <Circle style={circle2} />
         <Circle style={circle3} />
