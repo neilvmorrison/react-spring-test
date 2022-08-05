@@ -1,7 +1,7 @@
 .container {
   height: 48px;
   width: 48px;
-  background: teal;
+  background: linear-gradient(#e5f3cd, #d0f5e4);
   border-radius: 50%;
   position: absolute;
   top: calc(50% - 24px);
