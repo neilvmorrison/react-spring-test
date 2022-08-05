@@ -1,0 +1,20 @@
+.container {
+  height: 48px;
+  width: 48px;
+  background: teal;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+  transform: translateX(225px);
+}
+
+.small {
+  height: 36px;
+  width: 36px;
+}
+
+.medium {
+  height: 72px;
+  width: 72px;
+}
