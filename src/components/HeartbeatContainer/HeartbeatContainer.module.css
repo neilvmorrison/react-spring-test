@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+.ball {
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+  position: absolute;
+  background: #fff;
+  top: 50%;
+  left: 285px;
+}
+
+.menuBallContainer {
+  position: absolute;
+  display: inline;
+  top: calc(35% + 40px);
+  left: 1050px;
+}
+
+.menuBall {
+  height: 24px;
+  width: 24px;
+  margin-bottom: 16px;
+  opacity: 0.4;
+  background: #fff;
+  border-radius: 50%;
+}
